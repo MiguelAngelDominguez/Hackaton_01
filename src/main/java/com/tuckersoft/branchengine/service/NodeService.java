@@ -3,10 +3,10 @@ package com.tuckersoft.branchengine.service;
 import com.tuckersoft.branchengine.dto.CreateNodeRequest;
 import com.tuckersoft.branchengine.dto.NodeResponse;
 import com.tuckersoft.branchengine.entity.StoryNode;
+import com.tuckersoft.branchengine.exception.DuplicateResourceException;
+import com.tuckersoft.branchengine.exception.ResourceNotFoundException;
 import com.tuckersoft.branchengine.repository.StoryNodeRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
 import java.util.List;
@@ -22,10 +22,7 @@ public class NodeService {
 
     public NodeResponse create(CreateNodeRequest request) {
         if (repository.existsByNodeCode(request.nodeCode())) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "nodeCode already exists"
-            );
+            throw new DuplicateResourceException("Ya existe un nodo con el nodeCode " + request.nodeCode());
         }
 
         StoryNode node = new StoryNode();
@@ -50,10 +47,7 @@ public class NodeService {
 
     public NodeResponse findById(Long id) {
         StoryNode node = repository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "StoryNode not found"
-                ));
+                .orElseThrow(() -> new ResourceNotFoundException("No existe un nodo con el id " + id));
 
         return toResponse(node);
     }

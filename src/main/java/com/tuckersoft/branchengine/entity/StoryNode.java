@@ -1,17 +1,16 @@
 package com.tuckersoft.branchengine.entity;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.time.Instant;
 
 @Entity
 @Table(name = "story_nodes")
-@Getter
-@Setter
-@NoArgsConstructor
 public class StoryNode {
 
     @Id
@@ -41,4 +40,76 @@ public class StoryNode {
 
     @Column(nullable = false)
     private Instant createdAt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNodeCode() {
+        return nodeCode;
+    }
+
+    public void setNodeCode(String nodeCode) {
+        this.nodeCode = nodeCode;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSceneText() {
+        return sceneText;
+    }
+
+    public void setSceneText(String sceneText) {
+        this.sceneText = sceneText;
+    }
+
+    public Integer getBranchCapacity() {
+        return branchCapacity;
+    }
+
+    public void setBranchCapacity(Integer branchCapacity) {
+        this.branchCapacity = branchCapacity;
+    }
+
+    public Integer getCurrentBranches() {
+        return currentBranches;
+    }
+
+    public void setCurrentBranches(Integer currentBranches) {
+        this.currentBranches = currentBranches;
+    }
+
+    public String getPrimaryBranchCode() {
+        return primaryBranchCode;
+    }
+
+    public void setPrimaryBranchCode(String primaryBranchCode) {
+        this.primaryBranchCode = primaryBranchCode;
+    }
+
+    public String getGlitchBranchCode() {
+        return glitchBranchCode;
+    }
+
+    public void setGlitchBranchCode(String glitchBranchCode) {
+        this.glitchBranchCode = glitchBranchCode;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
 }

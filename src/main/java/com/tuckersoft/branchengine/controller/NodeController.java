@@ -5,6 +5,7 @@ import com.tuckersoft.branchengine.dto.NodeResponse;
 import com.tuckersoft.branchengine.service.NodeService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class NodeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public NodeResponse create(@Valid @RequestBody CreateNodeRequest request) {
         return service.create(request);
     }
